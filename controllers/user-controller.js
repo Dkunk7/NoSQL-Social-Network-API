@@ -22,7 +22,7 @@ const userController = {
     },
     // get single user
     getUserById: function({ params }, res) {
-        Uer.findOne({ _id: params.id })
+        Uer.findOne({ _id: params.userId })
             .populate({
                 path: `thoughts`,
                 select: `-__v`
@@ -52,7 +52,7 @@ const userController = {
     },
     // update user by id
     updateUser: function({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+        User.findOneAndUpdate({ _id: params.userId }, body, { new: true, runValidators: true })
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: `No user found with this id :(` });
@@ -64,7 +64,7 @@ const userController = {
     },
     // delete user
     deleteUser: function({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
+        User.findOneAndDelete({ _id: params.userId })
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: `No user found with this id :(` });
@@ -77,7 +77,7 @@ const userController = {
     // add new friend to friends list
     addFriend: function({ params, body }, res) {
         User.findOneAndUpdate(
-            { _id: params.id },
+            { _id: params.userId },
             { $push: { friends: body } },
             { new: true, runValidators: true }
         )
@@ -93,7 +93,7 @@ const userController = {
     // remove friend from friends list
     removeFriend: function({ params }, res) {
         User.findOneAndUpdate(
-            { _id: params.id },
+            { _id: params.userId },
             // not sure if I have to change something else to friendId for this
             { $pull: { friends: { friendId: params.friendId } } },
             { new: true }
