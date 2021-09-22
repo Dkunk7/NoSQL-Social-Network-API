@@ -12,6 +12,9 @@ const {
 router
     .route(`/`)
     .get(getAllThoughts)
+
+router
+    .route(`/:userId`)
     .post(createThought);
 
 router
@@ -22,8 +25,11 @@ router
 
 router
     // concerned with layout here, just like in user routes
-    .route(`/:thoughtId:reactions`)
+    .route(`/:thoughtId/reactions`)
     .post(addReaction)
+
+router
+    .route(`/:thoughtId/reactions/:reactionId`)
     .delete(removeReaction);
 
 module.exports = router;

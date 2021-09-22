@@ -22,7 +22,7 @@ const userController = {
     },
     // get single user
     getUserById: function({ params }, res) {
-        Uer.findOne({ _id: params.userId })
+        User.findOne({ _id: params.userId })
             .populate({
                 path: `thoughts`,
                 select: `-__v`

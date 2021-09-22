@@ -5,11 +5,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.user(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 // I don't think this is necessary for just a backend, but it's here now!
-app.user(express.static(`public`));
+app.use(express.static(`public`));
 
-app.user(require(`./routes`));
+app.use(require(`./routes`));
 
 // Not sure if this is necessary
 mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/pizza-hunt`, {
