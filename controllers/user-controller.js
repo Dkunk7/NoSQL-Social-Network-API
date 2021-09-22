@@ -73,6 +73,33 @@ const userController = {
                 res.json(dbUserData);
             })
             .catch(err => res.status(400).json(err));
+    },
+    // add new friend to friends list
+    addFriend: function({ params, body }, res) {
+        User.findOneAndUpdate(
+            { _id: params.id },
+            { $push: { friends: body } },
+            { new: true, runValidators: true }
+        )
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: `No user found with this id :(` });
+                    return;
+                }
+                res.json(dbUserData);
+            })
+            .catch(err => res.json(err));
+    },
+    // remove friend from friends list
+    removeFriend: function({ params }, res) {
+        User.findOneAndUpdate(
+            { _id: params.id },
+            // not sure if I have to change something else to friendId for this
+            { $pull: { friends: { friendId: params.friendId } } },
+            { new: true }
+        )
+            .then(dbUserData => res.json(dbUserData))
+            .catch(err => res.json(err));
     }
 };
 
