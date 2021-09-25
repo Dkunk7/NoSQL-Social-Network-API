@@ -27,7 +27,8 @@ const ReactionSchema = new Schema(
         toJSON: {
             getters: true
         },
-        id: false
+        // I think this is supposed to prevent _id from appearing? But it doesn't seem to be working.
+        _id: false
     }
 )
 
