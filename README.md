@@ -37,7 +37,7 @@
   - Add friend: `http://localhost:3001/api/users/:userId/friends`
   - Remove friend: `http://localhost:3001/api/users/:userId/friends/:friendId`
   - Add reaction: `http://localhost:3001/api/thoughts/:thoughtId/reactions`
-  - Remove reactio: `http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId`
+  - Remove reaction: `http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId`
 
   ## Questions
   If you have any questions:
